@@ -8,8 +8,11 @@ import src.find_route
 # start_coord = 17.54730, 78.57258 #BITS HYD
 # goal_coord = 17.2407, 78.4291    #RGIA
 
-start_coord = 17.54078, 78.57655 #BITS HYD ISOLATED
-goal_coord = 17.2302, 78.4295    #RGIA ISOLATED
+# start_coord = 17.54078, 78.57655 #BITS HYD ISOLATED
+# goal_coord = 17.2302, 78.4295    #RGIA ISOLATED
+
+start_coord = 17.45752, 78.42912 #manikonda
+goal_coord = 17.40012, 78.38257    #mothinagar
 
 # start_coord = 17.40379, 78.46795 #IMP-DONT LOSE
 # goal_coord = 17.40724, 78.46794  #IMP-DONT DELETE
@@ -60,5 +63,5 @@ with open(curr_path + details['DB_NAME'] + "_edges.edg", 'rb') as handle:
 x, parent = src.find_route.ASTAR(start, goal, graph, vertex, edge)
 print(x)
 # print(parent)
-
+print('ASTAR DONE...')
 src.make_map.overlay_map(start, goal, parent, vertex, edge, x)

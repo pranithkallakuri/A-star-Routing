@@ -65,7 +65,7 @@ def overlay_map(start, goal, parent, vertex, edge, x):
         <title>OpenLayers Map Overlay</title>
     </head>
     <body>
-        <h2>Route - Dist = {dist}km</h2>
+        <h2>Route - Time = {time}hrs</h2>
         <div id="map" class="map"></div>
         <script type="text/javascript">
         var map = new ol.Map({{
@@ -140,7 +140,7 @@ def overlay_map(start, goal, parent, vertex, edge, x):
         </script>
     </body>
     </html>
-    """.format(dist=round(x[0]/1000, 2), v_list=v_list, p_list=p_list, src=v_list[0], dest=v_list[-1])
+    """.format(time=round(x[0], 2), v_list=v_list, p_list=p_list, src=v_list[0], dest=v_list[-1])
 
     with open('map.html', 'w') as file:
         file.write(str1)

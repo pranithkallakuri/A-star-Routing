@@ -43,7 +43,7 @@ cur.execute('CREATE TABLE edge_table AS ' +
 	            'SELECT id, osm_name, source, y1, x1, ST_MakePoint(x1, y1) as geom_source, ' + 
 	                'target, y2, x2, ST_MakePoint(x2, y2) as geom_target, ' +
 	                'ST_DistanceSphere(ST_MakePoint(x1, y1), ST_MakePoint(x2, y2)) AS dist_in_meters, ' + 
-	                'reverse_cost, kmh AS speed_limit_kmh ' +
+	                'cost, reverse_cost, kmh AS speed_limit_kmh ' +
 	            'FROM at_2po_4pgr;'
 )
 conn.commit()
