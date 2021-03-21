@@ -10,7 +10,7 @@ def overlay_map(start, goal, parent, vertex, edge, x):
     conn = psycopg2.connect(dbname=details['DB_NAME'], user=details['DB_USER'], password=details['DB_PASS'], host=details['DB_HOST'])
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     print("Connection in make_map successful....")
-  
+    dist = 0
     p = goal
     v_list = []
     p_list = []
@@ -35,6 +35,7 @@ def overlay_map(start, goal, parent, vertex, edge, x):
         # print("v_id = ", p)
         p_list.append([vertex[p-1]['longitude'], vertex[p-1]['latitude']])
         street_names.append(edge[parent[p]['prev_e_id']-1]['osm_name'])
+        dist += edge[parent[p]['prev_e_id']-1]['dist_in_meters']
         p = parent[p]['parent_v_id']
 
     cur.close()
@@ -65,7 +66,7 @@ def overlay_map(start, goal, parent, vertex, edge, x):
         <title>OpenLayers Map Overlay</title>
     </head>
     <body>
-        <h2>Route - Time = {time}hrs</h2>
+        <h2>Route - Time = {timeh}:{timem}hrs ; Dist = {dist}km</h2>
         <div id="map" class="map"></div>
         <script type="text/javascript">
         var map = new ol.Map({{
@@ -140,7 +141,13 @@ def overlay_map(start, goal, parent, vertex, edge, x):
         </script>
     </body>
     </html>
-    """.format(time=round(x[0], 2), v_list=v_list, p_list=p_list, src=v_list[0], dest=v_list[-1])
+    """.format(timeh=int(x[0]), 
+               timem=int((x[0]*60)%60),
+               dist=round(dist/1000, 2), 
+               v_list=v_list, 
+               p_list=p_list, 
+               src=v_list[0], 
+               dest=v_list[-1])
 
     with open('map.html', 'w') as file:
         file.write(str1)

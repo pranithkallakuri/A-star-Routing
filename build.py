@@ -12,7 +12,7 @@
 ##         iv.  sudo -u postgres psql osm --command='CREATE EXTENSION hstore;'
 ##     5. Enter/Update your DB_HOST, DB_USER, DB_NAME, DB_PASS in the 'database.config' file
 ##     6. The following Python Packages may have to be installed on your Machine:
-##         --> 'psycopg2', 'configparser', 'heapq', 'webbrowser'
+##         --> 'psycopg2', 'configparser', 'heapq', 'webbrowser', 'tkinter'
 ##     7. Download and unzip "osm2po"
 ##     8. Run the command: java -jar osm2po-core-w.x.yz-signed.jar prefix=at "FILE_PATH/filename.osm"
 ##     9. Run the command: cd /osm2po-w-x-yz/at

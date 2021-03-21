@@ -4,18 +4,108 @@ import configparser
 import pickle
 import src.make_map
 import src.find_route
+import tkinter
+import tkinter.messagebox
 
-# start_coord = 17.54730, 78.57258 #BITS HYD
-# goal_coord = 17.2407, 78.4291    #RGIA
+start_coord = tuple()
+goal_coord = tuple()
 
-# start_coord = 17.54078, 78.57655 #BITS HYD ISOLATED
-# goal_coord = 17.2302, 78.4295    #RGIA ISOLATED
+#BASIC GUI
+#----------------------------------------------------------------------------------#
+def buttonClicked(root, svar, dvar, lat1, lon1, lat2, lon2):
+    global start_coord, goal_coord
+    minlat=float("17.1913000")
+    minlon=float("78.2185000") 
+    maxlat=float("17.6139000") 
+    maxlon=float("78.6916000")
 
-start_coord = 17.45752, 78.42912 #manikonda
-goal_coord = 17.40012, 78.38257    #mothinagar
+    if svar.get() == 'N':
+        slat = float(sl1.get())
+        slon = float(sl2.get())
+        slat = minlat if slat < minlat else slat
+        slat = maxlat if slat > maxlat else slat
+        slon = minlon if slon < minlon else slon
+        slon = maxlon if slon > maxlon else slon
+        start_coord = float(slat), float(slon)
+    if svar.get() == 'BPHC':
+        start_coord = 17.5416, 78.5752
+    if svar.get() == 'RGIA':
+        start_coord = 17.23645, 78.42952
 
-# start_coord = 17.40379, 78.46795 #IMP-DONT LOSE
-# goal_coord = 17.40724, 78.46794  #IMP-DONT DELETE
+    if dvar.get() == 'N':
+        dlat = float(dl1.get())
+        dlon = float(dl2.get())
+        print(dlat, dlon)
+        print(dlat < minlat)
+        dlat = minlat if dlat < minlat else dlat
+        dlat = maxlat if dlat > maxlat else dlat
+        dlon = minlon if dlon < minlon else dlon
+        dlon = maxlon if dlon > maxlon else dlon
+        goal_coord = float(dlat), float(dlon)
+
+    if dvar.get() == 'BPHC':
+        goal_coord = 17.5416, 78.5752
+    if dvar.get() == 'RGIA':
+        goal_coord = 17.23645, 78.42952
+    print(start_coord, goal_coord)
+    if start_coord == goal_coord:
+        str1 = "Source and Destination are same \nPlease provide distinct Source and Destinations"
+        tkinter.messagebox.showerror("Error", str1)
+        exit(0)
+    root.destroy()
+    
+
+
+root = tkinter.Tk()
+root.geometry('1000x250')
+root.title("Enter Source/Destination")
+svar = tkinter.StringVar(None, 'N')
+dvar = tkinter.StringVar(None, 'N')
+ls = tkinter.Label(root, text = "Source")
+ld = tkinter.Label(root, text = "\nDestination") 
+slat = tkinter.Label(root, text='lat: ') 
+slon = tkinter.Label(root, text='    lon: ')
+dlat = tkinter.Label(root, text='lat: ') 
+dlon = tkinter.Label(root, text='    lon: ')
+snoop = tkinter.Radiobutton(root, text="lat/lon", value='N', variable=svar)
+sbphc = tkinter.Radiobutton(root, text="BPHC", value='BPHC', variable=svar)
+srgia = tkinter.Radiobutton(root, text="RGIA", value='RGIA', variable=svar)
+dnoop = tkinter.Radiobutton(root, text="lat/lon", value='N', variable=dvar)
+dbphc = tkinter.Radiobutton(root, text="BPHC", value='BPHC', variable=dvar)
+drgia = tkinter.Radiobutton(root, text="RGIA", value='RGIA', variable=dvar)
+but = tkinter.Button(root, text ="Calculate!", command =lambda: buttonClicked(root, svar, dvar, sl1, sl2, dl1, dl2))
+
+sl1 = tkinter.Entry(root) 
+sl2 = tkinter.Entry(root)
+dl1 = tkinter.Entry(root) 
+dl2 = tkinter.Entry(root)
+
+ls.grid(row=0)
+slat.grid(row=1, column=0)
+sl1.grid(row=1, column=1)
+slon.grid(row=1, column=2)
+sl2.grid(row=1, column=3)
+snoop.grid(row=1, column=5)
+tkinter.Label(root, text="\t(OR)\t").grid(row=1, column=6)
+sbphc.grid(row=1, column=7)
+srgia.grid(row=1, column=8)
+tkinter.Label(root, text="").grid(row=3)
+ld.grid(row=4)
+dlat.grid(row=5, column=0)
+dl1.grid(row=5, column=1)
+dlon.grid(row=5, column=2)
+dl2.grid(row=5, column=3)
+dnoop.grid(row=5, column=5)
+tkinter.Label(root, text="\t(OR)\t").grid(row=5, column=6)
+dbphc.grid(row=5, column=7)
+drgia.grid(row=5, column=8)
+tkinter.Label(root, text="").grid(row=6)
+tkinter.Label(root, text="").grid(row=7)
+but.grid(row=8, column=3) 
+
+tkinter.mainloop()
+#-------------------------------------------------------------------------------------------#
+#Actual running from below  
 
 ######## MAIN EXECUTION PART ############
 config = configparser.ConfigParser()
