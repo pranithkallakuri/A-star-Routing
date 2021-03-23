@@ -43,6 +43,7 @@ def ASTAR(start, goal, graph, vertex, edge):
             if t == 0:
                 lat, lon = vertex[n_vtx-1]['latitude'], vertex[n_vtx-1]['longitude']
                 h = heuristic(lat, lon, glat, glon)
+                graph[n_vtx]['type'] = 1
                 g = edge[e_id-1]['cost'] + graph[x[1]]['dist_to_start']  #Adding previous g value to current g 
                 graph[n_vtx]['dist_to_start'] = g
                 heapq.heappush(open_list, (g+h, n_vtx))
@@ -53,7 +54,8 @@ def ASTAR(start, goal, graph, vertex, edge):
                 new_g = edge[e_id-1]['cost'] + graph[x[1]]['dist_to_start']
                 if new_g < old_g:
                     lat, lon = vertex[n_vtx-1]['latitude'], vertex[n_vtx-1]['longitude']
-                    h = heuristic(lat, lon, glat, glon) 
+                    h = heuristic(lat, lon, glat, glon)
+                    graph[n_vtx]['dist_to_start'] = new_g 
                     heapq.heappush(open_list, (new_g+h, n_vtx))
                     parent[n_vtx] = {'parent_v_id': x[1], 'prev_e_id': e_id, 'parent_loc': 0 if loc == 1 else 1}
 
@@ -64,6 +66,7 @@ def ASTAR(start, goal, graph, vertex, edge):
                     graph[n_vtx]['type'] = 1
                     lat, lon = vertex[n_vtx-1]['latitude'], vertex[n_vtx-1]['longitude']
                     h = heuristic(lat, lon, glat, glon) 
+                    graph[n_vtx]['dist_to_start'] = new_g
                     heapq.heappush(open_list, (new_g+h, n_vtx))
                     parent[n_vtx] = {'parent_v_id': x[1], 'prev_e_id': e_id, 'parent_loc': 0 if loc == 1 else 1}
             

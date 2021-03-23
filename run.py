@@ -141,6 +141,7 @@ config.read('database.config')
 details = config['DB_PARAMS']
 curr_path = os.getcwd()
 curr_path += '/data/'
+print('Loading graph....')
 with open(curr_path + details['DB_NAME'] + "_graph.gph", 'rb') as handle:
     graph = pickle.load(handle)
 
@@ -149,7 +150,8 @@ with open(curr_path + details['DB_NAME'] + "_vertices.vtx", 'rb') as handle:
 
 with open(curr_path + details['DB_NAME'] + "_edges.edg", 'rb') as handle:
     edge = pickle.load(handle)
-
+print('Graph Successfully loaded...')
+print('ASTAR START...')
 x, parent = src.find_route.ASTAR(start, goal, graph, vertex, edge)
 print(x)
 # print(parent)
