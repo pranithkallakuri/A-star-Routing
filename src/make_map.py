@@ -41,7 +41,7 @@ def overlay_map(start, goal, parent, vertex, edge, x):
     cur.close()
     conn.close()
     print('connection closed...')
-
+    print('Number of nodes scanned =', len(parent))
     v_list.reverse()
     street_names.reverse()
     # print()
