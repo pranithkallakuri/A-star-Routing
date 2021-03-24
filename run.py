@@ -132,6 +132,10 @@ cur.execute('SELECT id FROM vertex_table ' +
 
 goal = cur.fetchone()[0]
 print("goal = ", goal)
+
+cur.execute('SELECT max(speed_limit_kmh) FROM edge_table;')
+maxspeedlimit = cur.fetchone()[0]
+#print(maxspeedlimit)
 cur.close()
 conn.close()
 
@@ -152,7 +156,7 @@ with open(curr_path + details['DB_NAME'] + "_edges.edg", 'rb') as handle:
     edge = pickle.load(handle)
 print('Graph Successfully loaded...')
 print('ASTAR START...')
-x, parent = src.find_route.ASTAR(start, goal, graph, vertex, edge)
+x, parent = src.find_route.ASTAR(start, goal, graph, vertex, edge, maxspeedlimit)
 print(x)
 # print(parent)
 print('ASTAR DONE...')
