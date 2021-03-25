@@ -34,6 +34,13 @@ config = configparser.ConfigParser()
 config.read('database.config')
 details = config['DB_PARAMS']
 
+print("Caution: Pickled graph files will be deleted")
+print("Are you sure you want to continue..?(Y/N)")
+inp = input()
+if inp.lower() != 'y':
+    print("exiting")
+    exit(0)
+    
 conn = psycopg2.connect(dbname=details['DB_NAME'], user=details['DB_USER'], password=details['DB_PASS'], host=details['DB_HOST'])
 cur = conn.cursor()
 
