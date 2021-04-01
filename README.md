@@ -1,8 +1,8 @@
 # A-star-Routing
 
-###(Tested on Ubuntu-18.04)
+### (Tested on Ubuntu-18.04)
 
-##Requirements
+## Requirements
 1. Java runtime environment ("jre1.8" or above)
 2. postgresql ("13.2, server 10.16" or above)
 3. PostGIS ("2.4.4 r16526" or above)
