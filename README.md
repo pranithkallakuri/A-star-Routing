@@ -18,5 +18,5 @@
 10. Run the command: `cd /osm2po-w-x-yz/at`
 11. Run the command: `psql -U [DB_USER] -d [DB_NAME] -f filename.osm`
 12. You will now have a table named `at_2po_4gr` in your database.
-13. For the first time execute this python code 'build.py'. After executing it once you need not run it again.
-14. Now execute run.py for each of your routing queries
+13. For the first time execute this python code `build.py`. After executing it once you need not run it again.
+14. Now execute `run.py` for each of your routing queries
