@@ -7,10 +7,10 @@
 2. postgresql ("13.2, server 10.16" or above)
 3. PostGIS ("2.4.4 r16526" or above)
 4. Now run the following commands on your terminal
-  1. `sudo -u postgres createuser [DB_USER]`
-  1. `sudo -u postgres createdb --encoding=UTF8 --owner=[DB_USER] [DB_NAME]`
-  1. `sudo -u postgres psql osm --command='CREATE EXTENSION postgis;'`
-  1. `sudo -u postgres psql osm --command='CREATE EXTENSION hstore;'`
+    1. `sudo -u postgres createuser [DB_USER]`
+    1. `sudo -u postgres createdb --encoding=UTF8 --owner=[DB_USER] [DB_NAME]`
+    1. `sudo -u postgres psql osm --command='CREATE EXTENSION postgis;'`
+    1. `sudo -u postgres psql osm --command='CREATE EXTENSION hstore;'`
 5. Enter/Update your DB_HOST, DB_USER, DB_NAME, DB_PASS in the 'database.config' file
 6. The following Python Packages may have to be installed on your Machine: `psycopg2`, `configparser`, `heapq`, `webbrowser`
 8. Download and unzip "osm2po", cd into the unzipped directory
